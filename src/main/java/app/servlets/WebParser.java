@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 public class WebParser extends HttpServlet {
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -20,9 +22,10 @@ public class WebParser extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DAOImplementation daoImplementation = new DAOImplementation();
-        ResultsEntity resultsEntity =  new ResultsEntity();
+        ResultsEntity resultsEntity = new ResultsEntity();
+
 
         resultsEntity.setPage(req.getParameter("page"));
 
@@ -31,14 +34,18 @@ public class WebParser extends HttpServlet {
         TextAnalysis textAnalysis = new TextAnalysis();
         textAnalysis.setSplitWords(getHTML.getPathName());
 
-        resultsEntity.setWords_quantity(String.valueOf(textAnalysis.wordCount().size()));
+        Map<String, Integer> occurrences = textAnalysis.wordCount();
+
+        resultsEntity.setWords_quantity(String.valueOf(occurrences.size()));
+
         UsersEntity usersEntity = (UsersEntity) req.getSession().getAttribute("user");
         resultsEntity.setUser_id(usersEntity.getId());
         daoImplementation.save(resultsEntity);
+
+        textAnalysis.printWords(occurrences);
+
         req.getRequestDispatcher("/views/webparser.jsp").forward(req, resp);
     }
-
-
 
 
 }

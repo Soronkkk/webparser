@@ -10,16 +10,6 @@
             padding: 0;
         }
 
-        .button {
-            width: 50px;
-            height: 50px;
-            font-size: 25px;
-            margin: 2px;
-            cursor: pointer;
-            background: cornflowerblue;
-            border: none;
-            color: white;
-        }
 
         .main {
             position: absolute;
@@ -42,10 +32,8 @@
 <div class="main">
     <form name="form" method="post" id="form">
         <input type="text" name="page" class="w3-input w3-center w3-border w3-round-large"
-               style="position: relative"/><br/>
-        <input type="text" name="words_quantity" class="w3-input w3-center w3-border w3-round-large"
-               style="position: relative"/><br/>
-        <input class="button" type="submit" value="=">
+               style="position: relative"/><br>
+        <button class="w3-button w3-block w3-blue">Parse</button>
     </form>
 
 </div>

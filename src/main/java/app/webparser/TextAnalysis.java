@@ -14,7 +14,6 @@ public class TextAnalysis {
         try {
             String content = new Scanner(new File(path)).useDelimiter("\\Z").next().toUpperCase();
             this.splitWords = content.split("['\\s', '\\n', '\\r', '\\t', ',', '.', '!', '?', '\"', ';', ':', '[', ']', '(', ')']");
-            System.out.println(content);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -32,11 +31,13 @@ public class TextAnalysis {
                 occurrences.put(word, oldCount + 1);
             }
         }
+        return occurrences;
+    }
+
+    public void printWords(Map<String, Integer> occurrences){
         for (Map.Entry entry : occurrences.entrySet()) {
             System.out.println(entry.getKey() + " - " + entry.getValue());
         }
-        System.out.println(occurrences.size());
-        return occurrences;
     }
 
 }
