@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.UUID;
 
 @Data
@@ -29,10 +30,6 @@ public class UsersEntity {
 
     @Column(name = "PASSWORD", nullable = false)
     private String password;
-
-    @GeneratedValue(generator = "uuid")
-    @JoinColumn(name = "COOKIE", nullable = false)
-    private UUID cookie;
 
     public Long getId() {
         return id;
@@ -74,11 +71,33 @@ public class UsersEntity {
         this.password = password;
     }
 
-    public UUID getCookie() {
-        return cookie;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UsersEntity that = (UsersEntity) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(firstName, that.firstName) &&
+                Objects.equals(secondName, that.secondName) &&
+                Objects.equals(userName, that.userName) &&
+                Objects.equals(password, that.password);
     }
 
-    public void setCookie(UUID cookie) {
-        this.cookie = cookie;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, secondName, userName, password);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("UsersEntity{");
+        sb.append("id=").append(id);
+        sb.append(", firstName='").append(firstName).append('\'');
+        sb.append(", secondName='").append(secondName).append('\'');
+        sb.append(", userName='").append(userName).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

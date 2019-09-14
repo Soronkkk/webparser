@@ -16,11 +16,11 @@ public class GetHTML {
         this.url = url;
     }
 
-    public void getHtml() {
+    public void getHtmlToText() {
         try {
             Document document = Jsoup.connect(url).get();
             File file = new File(PATH_NAME);
-            FileUtils.writeStringToFile(file, document.text().replaceAll("\\<.*?\\>", ""), "UTF-8");
+            FileUtils.writeStringToFile(file, document.text().replaceAll("\\<.*?\\>", ""));
         } catch (IOException e) {
             e.printStackTrace();
         }

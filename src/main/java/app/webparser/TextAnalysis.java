@@ -35,6 +35,7 @@ public class TextAnalysis {
         for (Map.Entry entry : occurrences.entrySet()) {
             System.out.println(entry.getKey() + " - " + entry.getValue());
         }
+        System.out.println(occurrences.size());
         return occurrences;
     }
 
