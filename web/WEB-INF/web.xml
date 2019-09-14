@@ -5,6 +5,16 @@
          version="4.0">
 
     <servlet>
+        <servlet-name>webparser</servlet-name>
+        <servlet-class>app.servlets.WebParser</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>webparser</servlet-name>
+        <url-pattern>/webparser</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
         <servlet-name>login</servlet-name>
         <servlet-class>app.servlets.Login</servlet-class>
     </servlet>
