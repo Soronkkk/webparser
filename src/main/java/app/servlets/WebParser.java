@@ -24,10 +24,23 @@ public class WebParser extends HttpServlet {
         ResultsEntity resultsEntity =  new ResultsEntity();
         //resultsEntity.setPage(req.getParameter("page"));
         //resultsEntity.setWords_quantity(req.getParameter("words_quantity"));
+
         resultsEntity.setPage("qwe");
         resultsEntity.setWords_quantity("qwe");
         UsersEntity usersEntity = (UsersEntity) req.getSession().getAttribute("user");
+
+        System.out.println(usersEntity.getCookie());
+        System.out.println(usersEntity.getPassword());
+        System.out.println(usersEntity.getUserName());
+        System.out.println(usersEntity.getFirstName());
+        System.out.println(usersEntity.getSecondName());
+        System.out.println(usersEntity.getId());
+        System.out.println();
         resultsEntity.setCookie(usersEntity.getCookie());
+        System.out.println(resultsEntity.getCookie());
+        System.out.println(resultsEntity.getPage());
+        System.out.println(resultsEntity.getWords_quantity());
+        System.out.println(resultsEntity.getId());
         daoImplementation.save(resultsEntity);
         req.getRequestDispatcher("/views/webparser.jsp").forward(req, resp);
     }
